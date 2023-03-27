@@ -56,10 +56,12 @@ CREATE TABLE us_congress_members (
 --     SQL includes a lot of data quality checks like this
 --     to maintain data integrity.
 -- (ii) The maximum length of the strings is another for of quality control
+-- (iii) Include any column names with upper case in double quotations "..."
+
 DROP TABLE IF EXISTS bills_actions;
 
 CREATE TABLE bills_actions (
-        congress    int NOT NULL,
+        "Congress"  int NOT NULL,
         bill_number int ,
         bill_type   varchar(30),
         action      varchar(1000),
@@ -70,13 +72,27 @@ CREATE TABLE bills_actions (
 -- SQLBook: Markup
 <font size = "5">
 
+<span style="color:red"> Common Pitfall:</span>
+Include columns with upper case letter <br>
+in double quotations, e.g. "Congress"
+
+-- SQLBook: Markup
+<font size = "5">
+
 Try it yourself!
 
 - Create a new table for "bills_subjects"
 -- SQLBook: Code
-# Write your own code
+-- Write your own code
 
+DROP TABLE IF exists bills_subjects;
 
+CREATE TABLE bills_subjects(
+    "Congress" int,
+    bill_number int,
+    bill_type varchar(30),
+    bill_subject varchar(30)
+)
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Import CSV into SQL </span>
@@ -140,7 +156,7 @@ Try it yourself!
 SELECT * FROM us_congress_members
 ```
 -- SQLBook: Code
-# Write your own code
+-- Write your own code
 -- Note in the instructor's computer this is:
 -- You just have to change the FROM argument
 --
@@ -171,10 +187,6 @@ SELECT * FROM bills_actions
 -- COPY bills_actions
 -- FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\bills_actions.csv'
 -- WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
-
-
-
-
 
 
 -- SQLBook: Markup
